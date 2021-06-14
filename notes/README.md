@@ -56,3 +56,4 @@ const queryClient = useQueryClient();
 
 ## Mutation
 
+`useMutation` require a function that performs an asynchronous task and returns a promise.
