@@ -7,6 +7,19 @@
 - query `key` what we are going to name the query.
 - fetch function should be asynchronous function that fetch the data.
 
+```javascript
+const { data, isLoading, isError } = useQuery(
+    'posts',
+    () => fetchPosts(),
+    {
+      staleTime: 2000 // The time after data is considered stale. 
+    },
+  );
+
+  if (isLoading) return <h3> Loading... </h3>;
+  if (isError) return <h3> Something Wrong </h3>;
+```
+
 Other properties that return from `useQuery` hook
 
 - `isLoading` no cached data + `isFetching === true`
@@ -33,6 +46,20 @@ Data refetch only triggers for stale data eg. component remount, window re-focus
 ## Pagination
 
 Normally we'll provide `currentPage` and add it to dependencies array.
+
+```javascript
+const { data, isLoading, isError } = useQuery(
+    ['posts', currentPage],
+    () => fetchPosts(currentPage),
+    {
+      staleTime: 2000,
+      keepPreviousData: true,
+    },
+  );
+
+  if (isLoading) return <h3> Loading... </h3>;
+  if (isError) return <h3> Something Wrong </h3>;
+```
 
 ## Pre-fetching
 
